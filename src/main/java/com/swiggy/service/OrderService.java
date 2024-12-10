@@ -49,12 +49,15 @@ public class OrderService {
 		
 		//store entity object into orderResponse to send back into controller layer
 		List<OrderResponse> odrs = new ArrayList<>();
+		
 		for(OrderItems oderitem : odrsentity) {
 			
 			OrderResponse oderrep = new OrderResponse();   //create a orderresponse
 			oderrep.setOrderId(oderitem.getOrderId());     //setting value from entity to response
 			oderrep.setOrderItem(oderitem.getOrderItem()); 
 			oderrep.setOrderValue(oderitem.getOrderValue()); 
+			
+			odrs.add(oderrep);   //adding oderresp object into list of orderresponse
 		}
 		
 		return odrs;
