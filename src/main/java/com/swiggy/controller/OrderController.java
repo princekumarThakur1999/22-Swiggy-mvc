@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,4 +59,25 @@ public class OrderController {
 		return oders;
 	}
 	
+	//single path variable
+	@GetMapping("/fetch/{orderId}")
+	public OrderResponse fetchByOrderid(@PathVariable("orderId") String orderId) {
+		
+		//Storing orderReponse from service layer to Controller layer
+		OrderResponse oders = odrservice.fetchByOrderid(orderId);
+		
+		//Spring Automatically converting JAVA to JSON
+		return oders;
+	}
+	
+	//multiple path variable
+	@GetMapping("/fetch/value/{orderValue}/item/{odrItms}")
+	public List<OrderResponse> fetchByOrderValueAndOrderItem(@PathVariable String orderValue, @PathVariable("odrItms") String orderItem){
+		
+		//Storing orderReponse from service layer to Controller layer
+		List<OrderResponse> odrreps = odrservice.fetchByOrderValueAndOrderItem(orderValue,orderItem);
+		
+		//Spring Automatically converting JAVA to JSON
+		return odrreps;
+	}
 }
