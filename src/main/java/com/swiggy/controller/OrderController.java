@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.swiggy.request.OrderRequest;
@@ -79,5 +80,15 @@ public class OrderController {
 		
 		//Spring Automatically converting JAVA to JSON
 		return odrreps;
+	}
+	
+	@GetMapping("/get")   //http://localhost:8082/22-Swiggy-app/order/get?orderitems=Chicken%20lolipop
+	public List<OrderResponse> fetchByOrderitem(@RequestParam("orderitem") String orderitem){
+		//it will collect the data from the request. it is key-value pair where key is orderitems and value is Chicken lolipop. value are storing into "orderitem" variable.
+		
+		//return "Your orderitem is " + orderitem +" is it taste.";
+		
+		List<OrderResponse> orderRes = odrservice.fetchByOrderitem(orderitem);
+		return orderRes;
 	}
 }

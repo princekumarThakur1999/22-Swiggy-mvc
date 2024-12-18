@@ -14,4 +14,6 @@ public interface OrderRepository extends JpaRepository<OrderItems, String>{
 
 	List<OrderItems> findByOrderValueAndOrderItem(String orderValue, String orderItem);
 
+	List<OrderItems> findByOrderItem(String orderitem);  //this value should be same as entity and db cloumn value "OrderItem"
+
 }

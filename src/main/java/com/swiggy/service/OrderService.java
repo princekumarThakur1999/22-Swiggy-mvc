@@ -97,5 +97,25 @@ public class OrderService {
 		}
 		return odrs;        //adding oderresp object into list of orderresponse
 	}
+
+	public List<OrderResponse> fetchByOrderitem(String orderitem) {
+		
+	        	//fetch data from repository layer and store into entity obj
+				List<OrderItems> oderitems = orderRepository.findByOrderItem(orderitem);
+				
+				//Store entity object data into OrderResponse & send back to controller layer 
+				List<OrderResponse> odrs = new ArrayList<>();
+				
+				for(OrderItems oderitem : oderitems) {
+					
+					OrderResponse oderrep = new OrderResponse();   //create a orderresponse
+					oderrep.setOrderId(oderitem.getOrderId());     //setting value from entity to response
+					oderrep.setOrderItem(oderitem.getOrderItem());
+					oderrep.setOrderValue(oderitem.getOrderValue());
+					
+					odrs.add(oderrep);
+				}
+				return odrs;        //adding oderresp object into list of orderresponse		
+	}
 	
 }
