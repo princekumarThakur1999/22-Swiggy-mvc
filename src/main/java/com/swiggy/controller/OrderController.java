@@ -82,6 +82,7 @@ public class OrderController {
 		return odrreps;
 	}
 	
+	// Query Parameter 
 	@GetMapping("/get")   //http://localhost:8082/22-Swiggy-app/order/get?orderitems=Chicken%20lolipop
 	public List<OrderResponse> fetchByOrderitem(@RequestParam("orderitem") String orderitem){
 		//it will collect the data from the request. it is key-value pair where key is orderitems and value is Chicken lolipop. value are storing into "orderitem" variable.
@@ -91,4 +92,17 @@ public class OrderController {
 		List<OrderResponse> orderRes = odrservice.fetchByOrderitem(orderitem);
 		return orderRes;
 	}
+	
+	//Multiple Query parameter
+    @GetMapping("/get/value/item")
+		public List<OrderResponse> fetchByOrderValueandOrderItem(
+									@RequestParam(name = "orderValue", required = false) String orderValue,
+									@RequestParam(name = "odrItms", required = false) String odrItms){
+			
+			//Storing orderReponse from service layer to Controller layer
+			List<OrderResponse> odrreps = odrservice.fetchByOrderValueandOrderItem(orderValue,odrItms);
+			
+			//Spring Automatically converting JAVA to JSON
+			return odrreps;
+		}
 }
